@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs
+  labels:
+    app: nodejs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs
+  template:
+    metadata:
+      labels:
+        app: nodejs
+    spec:
+      containers:
+      - name: nodejs
+        image: aliumrani/node-js-ali:v1 
+        ports:
+        - containerPort: 8593
+        env:
+        - name: PORT
+          value: "8593"
+        - name: MONGODB_ADDON_URI
+          value: mongodb://mongo:6348/demo
